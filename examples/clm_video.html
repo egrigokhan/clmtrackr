@@ -75,19 +75,6 @@
 				window.location.protocol = "https";
 			}
 		</script>
-		<script type="text/javascript">
-
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-32642923-1']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-
-		</script>
 	</head>
 	<body>
 		<script src="./js/libs/utils.js"></script>
@@ -229,8 +216,17 @@
 					requestAnimFrame(drawLoop);
 					overlayCC.clearRect(0, 0, vid_width, vid_height);
 					//psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
-					if (ctrack.getCurrentPosition()) {
+					let position = ctrack.getCurrentPosition()
+					if (position) {
 						ctrack.draw(overlay);
+
+						let leftEyep2p6DifSqr = Math.sqrt((positions[63][0] - positions[66][0])*(positions[63][0] - positions[66][0]) + (positions[63][1] - positions[66][1])*(positions[63][1] - positions[66][1]))
+						let leftEyep3p5DifSqr = Math.sqrt((positions[64][0] - positions[65][0])*(positions[64][0] - positions[65][0]) + (positions[64][1] - positions[65][1])*(positions[64][1] - positions[65][1]))
+						let leftEyep1p4DifSqr = Math.sqrt((positions[23][0] - positions[25][0])*(positions[23][0] - positions[25][0]) + (positions[23][1] - positions[25][1])*(positions[23][1] - positions[25][1]))
+
+						let leftEyeEAR = (leftEyep2p6DifSqr + leftEyep3p5DifSqr) / (2*leftEyep1p4DifSqr)
+
+						console.log(leftEyeEAR)
 					}
 				}
 
